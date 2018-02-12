@@ -1,5 +1,5 @@
 import DS from 'ember-data';
-import {isBlank, isPresent} from '@ember/utils';
+import {isPresent} from '@ember/utils';
 import {singularize} from 'ember-inflector';
 import {dasherize} from '@ember/string';
 import {getOwner} from "@ember/application";
@@ -15,30 +15,6 @@ const nullTransform = {
 };
 
 export default DS.Transform.extend({
-
-  /**
-   * @override
-   */
-  deserialize(serialized, {type}) {
-    if(isBlank(serialized)) {
-      return;
-    }
-
-    const ComplexAttrFactory = this.factoryForType(type);
-
-    return ComplexAttrFactory.create(this.deserializeAttributes(this.attributeMetadataForType(type), serialized));
-  },
-
-  /**
-   * @override
-   */
-  serialize(deserialized, {type}) {
-    if(isBlank(deserialized)) {
-      return;
-    }
-
-    return this.serializeAttributes(this.attributeMetadataForType(type), deserialized);
-  },
 
   /**
    * @method attributeMetadataForType

@@ -10,14 +10,14 @@ const FooComplexAttr = BaseComplexAttr.extend({
   riderId: attr('string'),
   riderDisplayName: attr('string'),
   participantId: attr('string'),
-  nestedComplexAttr: attr('complex-attr', {type: 'bar'})
+  nestedComplexAttr: attr('complex-attr-object', {type: 'bar'})
 });
 
 const BarComplexAttr = BaseComplexAttr.extend({
   someProperty: attr('string')
 });
 
-moduleFor('transform:complex-attr', 'Unit | Transform | complex attr', {
+moduleFor('transform:complex-attr-object', 'Unit | Transform | complex attr', {
   beforeEach() {
     this.register('model:complex-attrs/foo', FooComplexAttr);
     this.register('model:complex-attrs/bar', BarComplexAttr);
