@@ -1,6 +1,7 @@
 import {moduleFor, test} from 'ember-qunit';
 
-import BaseComplexAttr, {attr} from 'ember-data-complex-attrs/models/complex-attrs/base';
+import BaseComplexAttr from 'ember-data-complex-attrs/models/complex-attrs/base';
+import attr from 'ember-data-complex-attrs/attr';
 import {typeOf} from '@ember/utils';
 import {run} from '@ember/runloop';
 

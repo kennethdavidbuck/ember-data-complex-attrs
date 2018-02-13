@@ -3,7 +3,8 @@ import {A} from '@ember/array';
 import {typeOf} from '@ember/utils';
 import {run} from '@ember/runloop';
 
-import BaseComplexAttr, {attr} from 'ember-data-complex-attrs/models/complex-attrs/base';
+import BaseComplexAttr from 'ember-data-complex-attrs/models/complex-attrs/base';
+import attr from 'ember-data-complex-attrs/attr';
 
 const FooComplexAttr = BaseComplexAttr.extend({
   payout: attr('number'),
