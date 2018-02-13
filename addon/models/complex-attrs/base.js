@@ -11,10 +11,8 @@ function getDefaultValue(complexAttr, options) {
 }
 
 /**
- * This is essentially the same as an ember-data attr only it
- * has been customized for the notion of a complex-attr. Regardless, it still
- * works the same way. If you pass in 'string', then the attribute will get
- * parsed as a string etc.
+ * This is essentially the same as an ember-data attr only it has been customized for the notion of a complex-attr.
+ * Regardless, it still works the same way. If you pass in 'string', then the attribute will get parsed as a string etc.
  */
 export const attr = function (type, options) {
   const meta = {
