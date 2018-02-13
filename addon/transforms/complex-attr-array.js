@@ -24,7 +24,7 @@ export default ComplexAttrTransform.extend({
    * @override
    */
   serialize(deserialized, {type}) {
-    if(isBlank(deserialized)) {
+    if (isBlank(deserialized)) {
       return;
     }
 

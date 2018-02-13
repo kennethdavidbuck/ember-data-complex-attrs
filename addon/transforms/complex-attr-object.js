@@ -7,7 +7,7 @@ export default ComplexAttrTransform.extend({
    * @override
    */
   deserialize(serialized, {type}) {
-    if(isBlank(serialized)) {
+    if (isBlank(serialized)) {
       return;
     }
 
@@ -20,7 +20,7 @@ export default ComplexAttrTransform.extend({
    * @override
    */
   serialize(deserialized, {type}) {
-    if(isBlank(deserialized)) {
+    if (isBlank(deserialized)) {
       return;
     }
 
