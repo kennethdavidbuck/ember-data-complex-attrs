@@ -21,7 +21,7 @@ export default DS.Transform.extend({
    * @param type
    * @returns {{}}
    */
-  attributeMetadataForType(type) {
+  attributesMetadataForType(type) {
     const ComplexAttrRegistration = this.registrationForType(type);
 
     const attributeMetadata = {};

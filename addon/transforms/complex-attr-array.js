@@ -13,7 +13,7 @@ export default ComplexAttrTransform.extend({
     }
 
     const ComplexAttrFactory = this.factoryForType(type);
-    const attributeMetadata = this.attributeMetadataForType(type);
+    const attributeMetadata = this.attributesMetadataForType(type);
 
     return A(serialized.map((attributes) => {
       return ComplexAttrFactory.create(this.deserializeAttributes(attributeMetadata, attributes));
@@ -28,7 +28,7 @@ export default ComplexAttrTransform.extend({
       return;
     }
 
-    const attributeMetadata = this.attributeMetadataForType(type);
+    const attributeMetadata = this.attributesMetadataForType(type);
 
     return deserialized.map((attributes) => this.serializeAttributes(attributeMetadata, attributes));
   }
