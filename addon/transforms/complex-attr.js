@@ -14,8 +14,8 @@ export default DS.Transform.extend({
 
   /**
    * @method attributeMetadataForType
-   * @param type
-   * @returns {{}}
+   * @param {String} type ComplexAttr type to fetch metadata for
+   * @returns {{}} The metadata values for the given ComplexAttr type
    */
   attributesMetadataForType(type) {
     const ComplexAttrRegistration = this.registrationForType(type);
