@@ -17,7 +17,7 @@ const BarComplexAttr = BaseComplexAttr.extend({
   someProperty: attr('string')
 });
 
-moduleFor('transform:complex-attr-object', 'Unit | Transform | complex attr', {
+moduleFor('transform:complex-attr-object', 'Unit | Transform | complex attr object', {
   beforeEach() {
     this.register('model:complex-attrs/foo', FooComplexAttr);
     this.register('model:complex-attrs/bar', BarComplexAttr);
@@ -92,12 +92,4 @@ test('#serialize works', function (assert) {
   // serialized nested complex attrs
   assert.strictEqual(serialized['nested-complex-attr']['id'], 'nested-id', 'nested id should be serialized');
   assert.strictEqual(serialized['nested-complex-attr']['some-property'], 'some value', 'nested property should be serialized');
-});
-
-test('#keyForType works', function (assert) {
-  assert.expect(1);
-
-  let transform = this.subject();
-
-  assert.strictEqual(transform.keyForType('cars'), 'model:complex-attrs/car');
 });
