@@ -3,10 +3,10 @@ import {A} from '@ember/array';
 import {typeOf} from '@ember/utils';
 import {run} from '@ember/runloop';
 
-import BaseComplexAttr from 'ember-data-complex-attrs/models/complex-attrs/complex-attr';
+import ComplexAttr from 'ember-data-complex-attrs/models/complex-attrs/complex-attr';
 import attr from 'ember-data-complex-attrs/attr';
 
-const FooComplexAttr = BaseComplexAttr.extend({
+const FooComplexAttr = ComplexAttr.extend({
   payout: attr('number'),
   rank: attr('number'),
   riderId: attr('string'),

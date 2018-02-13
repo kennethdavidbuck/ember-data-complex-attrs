@@ -1,11 +1,11 @@
 import {moduleFor, test} from 'ember-qunit';
 
-import BaseComplexAttr from 'ember-data-complex-attrs/models/complex-attrs/complex-attr';
+import ComplexAttr from 'ember-data-complex-attrs/models/complex-attrs/complex-attr';
 import attr from 'ember-data-complex-attrs/attr';
 import {typeOf} from '@ember/utils';
 import {run} from '@ember/runloop';
 
-const FooComplexAttr = BaseComplexAttr.extend({
+const FooComplexAttr = ComplexAttr.extend({
   payout: attr('number'),
   rank: attr('number'),
   riderId: attr('string'),
@@ -14,7 +14,7 @@ const FooComplexAttr = BaseComplexAttr.extend({
   nestedComplexAttr: attr('complex-attr-object', {type: 'bar'})
 });
 
-const BarComplexAttr = BaseComplexAttr.extend({
+const BarComplexAttr = ComplexAttr.extend({
   someProperty: attr('string')
 });
 
