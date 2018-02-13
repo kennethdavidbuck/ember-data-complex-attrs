@@ -6,12 +6,8 @@ import {getOwner} from "@ember/application";
 import {get} from '@ember/object';
 
 const nullTransform = {
-  deserialize(serialized) {
-    return serialized;
-  },
-  serialize(deserialized) {
-    return deserialized;
-  }
+  deserialize: (_) => _,
+  serialize: (_) => _
 };
 
 export default DS.Transform.extend({
