@@ -39,6 +39,4 @@ const BaseComplexAttr = EmberObject.extend({
   })
 });
 
-BaseComplexAttr.reopenClass({attr});
-
 export default BaseComplexAttr;
