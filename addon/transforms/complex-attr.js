@@ -2,7 +2,7 @@ import DS from 'ember-data';
 import {isPresent} from '@ember/utils';
 import {singularize} from 'ember-inflector';
 import {dasherize} from '@ember/string';
-import {getOwner} from "@ember/application";
+import {getOwner} from '@ember/application';
 import {get} from '@ember/object';
 
 const nullTransform = {
