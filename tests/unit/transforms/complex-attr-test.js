@@ -1,7 +1,7 @@
 import {module, test} from 'ember-qunit';
 import ComplexAttrTransform from 'ember-data-complex-attrs/transforms/complex-attr';
 
-module('Unit | Transform | complex attr',);
+module('Unit | Transform | complex attr');
 
 test('#keyForType works', function (assert) {
   assert.expect(1);
