@@ -1,5 +1,4 @@
 import {moduleFor, test} from 'ember-qunit';
-
 import ComplexAttr from 'ember-data-complex-attrs/models/complex-attrs/complex-attr';
 import attr from 'ember-data-complex-attrs/attr';
 import {typeOf} from '@ember/utils';
@@ -15,7 +14,8 @@ const FooComplexAttr = ComplexAttr.extend({
 });
 
 const BarComplexAttr = ComplexAttr.extend({
-  someProperty: attr('string')
+  someProperty: attr('string'),
+  nestedComplexAttr: attr('complex-attr-object', {type: 'bar'})
 });
 
 moduleFor('transform:complex-attr-object', 'Unit | Transform | complex attr object', {
@@ -26,19 +26,23 @@ moduleFor('transform:complex-attr-object', 'Unit | Transform | complex attr obje
 });
 
 test('#deserialize works', function (assert) {
-  assert.expect(9);
+  assert.expect(12);
 
   let transform = this.subject();
 
   const serialized = {
-    id: 'abc-123',
+    id: '2dc99887-39e6-4003-9e70-8cdff6eafd45',
     rank: '100',
     payout: '1000',
     'rider-display-name': 'Jim Bob',
     'participant-id': 1,
     'nested-complex-attr': {
-      id: 'dfd-ksjdfs',
-      'some-property': 'some value'
+      id: '3f2892a7-66d8-43cc-8491-483f31eda24d',
+      'some-property': 'some value',
+      'nested-complex-attr': {
+        'id': '31e4c388-e6ad-4062-a280-9ee1623d72b1',
+        'some-property': 'another value'
+      }
     }
   };
 
@@ -52,18 +56,25 @@ test('#deserialize works', function (assert) {
 
   assert.strictEqual(deserialized.get('riderDisplayName'), 'Jim Bob', 'rider display name should be deserialized');
   assert.strictEqual(deserialized.get('participantId'), '1', 'participant id should be deserialized and of correct type');
-  assert.strictEqual(deserialized.get('id'), 'abc-123', 'id should be deserialized');
+  assert.strictEqual(deserialized.get('id'), '2dc99887-39e6-4003-9e70-8cdff6eafd45', 'id should be deserialized');
   assert.strictEqual(deserialized.get('rank'), 100, 'rank should be deserialized and of correct type');
   assert.strictEqual(deserialized.get('payout'), 1000, 'payout should be deserialized and of correct type');
 
   // deserialized nested complex attrs
-  assert.ok(deserialized.get('nestedComplexAttr') instanceof BarComplexAttr, 'it allows nesting of other complex attrs');
-  assert.strictEqual(deserialized.get('nestedComplexAttr.id'), 'dfd-ksjdfs', 'next complex attr has the correct id');
-  assert.strictEqual(deserialized.get('nestedComplexAttr.someProperty'), 'some value', 'should have correct value');
+  const singleNestedComplexAttr = deserialized.get('nestedComplexAttr');
+  assert.ok(singleNestedComplexAttr instanceof BarComplexAttr, 'it allows nesting of other complex attrs');
+  assert.strictEqual(singleNestedComplexAttr.get('id'), '3f2892a7-66d8-43cc-8491-483f31eda24d', 'next complex attr has the correct id');
+  assert.strictEqual(singleNestedComplexAttr.get('someProperty'), 'some value', 'should have correct value');
+
+  // second level nesting
+  const doubleNestedComplexAttr = singleNestedComplexAttr.get('nestedComplexAttr');
+  assert.ok(doubleNestedComplexAttr instanceof BarComplexAttr, 'should be an instance of the correct complex attr');
+  assert.strictEqual(doubleNestedComplexAttr.get('id'), '31e4c388-e6ad-4062-a280-9ee1623d72b1');
+  assert.strictEqual(doubleNestedComplexAttr.get('someProperty'), 'another value');
 });
 
 test('#serialize works', function (assert) {
-  assert.expect(7);
+  assert.expect(9);
 
   let transform = this.subject();
 
@@ -73,8 +84,12 @@ test('#serialize works', function (assert) {
     riderDisplayName: 'Jim Bob',
     participantId: 1,
     nestedComplexAttr: FooComplexAttr.create({
-      id: 'nested-id',
-      someProperty: 'some value'
+      id: '2dc99887-39e6-4003-9e70-8cdff6eafd45',
+      someProperty: 'some value',
+      nestedComplexAttr: BarComplexAttr.create({
+        id: '31e4c388-e6ad-4062-a280-9ee1623d72b1',
+        someProperty: 'another value'
+      })
     })
   });
 
@@ -91,6 +106,12 @@ test('#serialize works', function (assert) {
   assert.strictEqual(serialized['payout'], 300, 'payout should be serialized');
 
   // serialized nested complex attrs
-  assert.strictEqual(serialized['nested-complex-attr']['id'], 'nested-id', 'nested id should be serialized');
-  assert.strictEqual(serialized['nested-complex-attr']['some-property'], 'some value', 'nested property should be serialized');
+  const singleNestedComplexAttr = serialized['nested-complex-attr'];
+  assert.strictEqual(singleNestedComplexAttr['id'], '2dc99887-39e6-4003-9e70-8cdff6eafd45', 'nested id should be serialized');
+  assert.strictEqual(singleNestedComplexAttr['some-property'], 'some value', 'nested property should be serialized');
+
+  // second level nesting
+  const doubleNestedComplexAttr = singleNestedComplexAttr['nested-complex-attr'];
+  assert.strictEqual(doubleNestedComplexAttr['id'], '31e4c388-e6ad-4062-a280-9ee1623d72b1', 'nested id should be serialized');
+  assert.strictEqual(doubleNestedComplexAttr['some-property'], 'another value');
 });
