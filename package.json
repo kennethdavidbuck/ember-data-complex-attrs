@@ -6,7 +6,7 @@
     "ember-addon"
   ],
   "license": "MIT",
-  "author": "",
+  "author": "rigosolutions",
   "private": true,
   "directories": {
     "doc": "doc",
