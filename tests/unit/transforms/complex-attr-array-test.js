@@ -105,24 +105,24 @@ test('#serialize works', function (assert) {
   let transform = this.subject();
 
   const model1 = FooComplexAttr.create({
-    payout: 300,
-    rank: 1,
+    payout: '300',
+    rank: '1',
     riderDisplayName: 'Jim Bob',
-    participantId: 1
+    participantId: '1'
   });
 
   const model2 = FooComplexAttr.create({
-    payout: 200,
-    rank: 2,
+    payout: '200',
+    rank: '2',
     riderDisplayName: 'Bob Jim',
-    participantId: 2
+    participantId: '2'
   });
 
   const model3 = FooComplexAttr.create({
-    payout: 100,
-    rank: 3,
+    payout: '100',
+    rank: '3',
     riderDisplayName: 'Bob Hope',
-    participantId: 3
+    participantId: '3'
   });
 
   let serialized;
