@@ -1,5 +1,5 @@
 'use strict';
 
 module.exports = {
-  name: 'ember-data-complex-attrs'
+  name: '@rigo/ember-data-complex-attrs'
 };

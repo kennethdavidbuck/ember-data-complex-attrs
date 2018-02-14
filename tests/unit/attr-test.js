@@ -1,6 +1,6 @@
 import {module, test} from 'ember-qunit';
-import attr from 'ember-data-complex-attrs/attr';
-import ComplexAttr from 'ember-data-complex-attrs/models/complex-attrs/complex-attr';
+import attr from '@rigo/ember-data-complex-attrs/attr';
+import ComplexAttr from '@rigo/ember-data-complex-attrs/models/complex-attrs/complex-attr';
 
 module('Unit | attr');
 

@@ -1,4 +1,4 @@
-import ComplexAttrTransform from 'ember-data-complex-attrs/transforms/complex-attr';
+import ComplexAttrTransform from '@rigo/ember-data-complex-attrs/transforms/complex-attr';
 import {isBlank} from '@ember/utils';
 
 export default ComplexAttrTransform.extend({

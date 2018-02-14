@@ -1,1 +1,1 @@
-export { default } from 'ember-data-complex-attrs/transforms/complex-attr-object';
+export { default } from '@rigo/ember-data-complex-attrs/transforms/complex-attr-object';
