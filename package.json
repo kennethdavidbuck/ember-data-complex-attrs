@@ -1,7 +1,7 @@
 {
   "name": "@rigo/ember-data-complex-attrs",
   "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "Arbitrary levels of nested complex attribute data types for ember data models",
   "keywords": [
     "ember-addon"
   ],
