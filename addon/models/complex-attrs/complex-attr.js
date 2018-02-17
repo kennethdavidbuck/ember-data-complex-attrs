@@ -8,6 +8,7 @@ const ComplexAttr = EmberObject.extend(Ember.Copyable);
 
 ComplexAttr.reopenClass({
   attributesMetadata() {
+    // TODO: Should we cache this value?
     const attributeMetadata = {};
 
     this.eachComputedProperty((name, meta) => {
