@@ -1,6 +1,6 @@
 {
   "name": "@rigo/ember-data-complex-attrs",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Arbitrary levels of nested complex attribute data types for ember data models",
   "keywords": [
     "ember-addon"
