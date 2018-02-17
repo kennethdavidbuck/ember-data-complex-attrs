@@ -101,7 +101,7 @@ test('copies in array (shallow)', function (assert) {
 });
 
 test('copies in array (deep)', function (assert) {
-  assert.expect(2);
+  assert.expect(3);
 
   const array = [SomeComplexAttr.create({
     foo: 'abc'
@@ -111,4 +111,6 @@ test('copies in array (deep)', function (assert) {
 
   assert.notEqual(array, arrayCopy, 'should be new array');
   assert.notEqual(A(array).get('firstObject'), A(arrayCopy).get('firstObject'), 'should be a new instance');
+
+  assert.equal(array[0].get('foo'), arrayCopy[0].get('foo'), 'foo property should have been copied');
 });
