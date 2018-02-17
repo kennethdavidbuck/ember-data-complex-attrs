@@ -8,7 +8,7 @@ export default ComplexAttrTransform.extend({
    */
   deserialize(serialized, {type}) {
     if (!isArray(serialized)) {
-      return;
+      return A();
     }
 
     const ComplexAttrFactory = this.factoryForType(type);
@@ -24,7 +24,7 @@ export default ComplexAttrTransform.extend({
    */
   serialize(deserialized, {type}) {
     if (!isArray(deserialized)) {
-      return null;
+      return [];
     }
 
     const attributeMetadata = this.attributesMetadataForType(type);
