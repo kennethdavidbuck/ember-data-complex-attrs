@@ -2,6 +2,7 @@ import {module, test} from 'ember-qunit';
 import ComplexAttr from '@rigo/ember-data-complex-attrs/models/complex-attrs/complex-attr';
 import attr from '@rigo/ember-data-complex-attrs/attr';
 import {copy} from '@ember/object/internals';
+import {A} from '@ember/array'
 
 let NestableComplexAttr = ComplexAttr.extend({
   foo: attr('string')
@@ -84,4 +85,30 @@ test('implements copyable (deep)', function (assert) {
 
   assert.notEqual(nestedComplexAttr, copiedNestedComplexAttr, 'should be a deep copy nested complex attr');
   assert.strictEqual(nestedComplexAttr.get('foo'), copiedNestedComplexAttr.get('foo'), 'should copy nested properties')
+});
+
+test('copies in array (shallow)', function (assert) {
+  assert.expect(2);
+
+  const array = [SomeComplexAttr.create({
+    foo: 'abc'
+  })];
+
+  const arrayCopy = A(array).copy();
+
+  assert.notEqual(array, arrayCopy, 'should be new array');
+  assert.equal(A(array).get('firstObject'), A(arrayCopy).get('firstObject'), 'should be same instance still');
+});
+
+test('copies in array (deep)', function (assert) {
+  assert.expect(2);
+
+  const array = [SomeComplexAttr.create({
+    foo: 'abc'
+  })];
+
+  const arrayCopy = A(array).copy(true);
+
+  assert.notEqual(array, arrayCopy, 'should be new array');
+  assert.notEqual(A(array).get('firstObject'), A(arrayCopy).get('firstObject'), 'should be a new instance');
 });
