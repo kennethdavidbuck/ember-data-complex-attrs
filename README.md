@@ -1,5 +1,9 @@
 # ember-data-complex-attrs
 
+[![Build Status](https://travis-ci.org/rigosolutions/ember-data-complex-attrs.svg?branch=develop)](https://travis-ci.org/rigosolutions/ember-data-complex-attrs) [![Dependencies](https://david-dm.org/rigosolutions/ember-data-complex-attrs.svg)](https://david-dm.org/rigosolutions/ember-data-complex-attrs)  [![Dev Dependencies](https://david-dm.org/rigosolutions/ember-data-complex-attrs/dev-status.svg)](https://david-dm.org/rigosolutions/ember-data-complex-attrs#info=devDependencies&view=table) 
+
+## Is it production ready? Nope
+
 This README outlines the details of collaborating on this Ember addon.
 
 ## Installation
