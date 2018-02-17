@@ -12,8 +12,9 @@ export default ComplexAttrTransform.extend({
     }
 
     const ComplexAttrFactory = this.factoryForType(type);
+    const ComplexAttrRegistration = this.registrationForType(type);
 
-    return ComplexAttrFactory.create(this.deserializeAttributes(this.attributesMetadataForType(type), serialized));
+    return ComplexAttrFactory.create(this.deserializeAttributes(ComplexAttrRegistration.attributesMetadata(), serialized));
   },
 
   /**
@@ -21,9 +22,11 @@ export default ComplexAttrTransform.extend({
    */
   serialize(deserialized, {type}) {
     if (isBlank(deserialized)) {
-      return;
+      return null;
     }
+    const ComplexAttrRegistration = this.registrationForType(type);
+    const attributeMetadata = ComplexAttrRegistration.attributesMetadata();
 
-    return this.serializeAttributes(this.attributesMetadataForType(type), deserialized);
+    return this.serializeAttributes(attributeMetadata, deserialized);
   }
 });
