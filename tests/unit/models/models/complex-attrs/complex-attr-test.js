@@ -1,7 +1,6 @@
 import {module, test} from 'ember-qunit';
 import ComplexAttr from '@rigo/ember-data-complex-attrs/models/complex-attrs/complex-attr';
 import attr from '@rigo/ember-data-complex-attrs/attr';
-import {copy} from '@ember/object/internals';
 import {A} from '@ember/array'
 
 let NestableComplexAttr = ComplexAttr.extend({
@@ -41,7 +40,7 @@ test('implements copyable (shallow)', function (assert) {
     nestedComplexAttr
   });
 
-  const copiedComplexAttr = copy(someComplexAttr);
+  const copiedComplexAttr = someComplexAttr.copy();
 
   assert.ok(copiedComplexAttr instanceof SomeComplexAttr, 'clone should be of correct type');
   assert.notEqual(copiedComplexAttr, someComplexAttr, 'clone should be a new instance');
@@ -71,7 +70,7 @@ test('implements copyable (deep)', function (assert) {
     nestedComplexAttr
   });
 
-  const copiedComplexAttr = copy(someComplexAttr, true);
+  const copiedComplexAttr = someComplexAttr.copy(true);
 
   assert.ok(copiedComplexAttr instanceof SomeComplexAttr, 'clone should be of correct type');
   assert.notEqual(copiedComplexAttr, someComplexAttr, 'clone should be a new instance');
