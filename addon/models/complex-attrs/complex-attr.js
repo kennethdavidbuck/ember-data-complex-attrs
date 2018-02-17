@@ -35,7 +35,7 @@ ComplexAttr.reopen({
         return result;
       }
 
-      result[attributeName] = deep ? copy(this.get(attributeName), true) : this.get(attributeName);
+      result[attributeName] = deep ? copy(this.get(attributeName), deep) : this.get(attributeName);
 
       return result;
     }, {});
