@@ -30,6 +30,11 @@ ComplexAttr.reopen({
     const attributesMetadata = klass.attributesMetadata();
 
     const properties = Object.keys(attributesMetadata).reduce((result, attributeName) => {
+      // do not copy id!
+      if(attributeName === 'id') {
+        return result;
+      }
+
       result[attributeName] = deep ? copy(this.get(attributeName), true) : this.get(attributeName);
 
       return result;

@@ -46,7 +46,7 @@ test('implements copyable (shallow)', function (assert) {
   assert.ok(copiedComplexAttr instanceof SomeComplexAttr, 'clone should be of correct type');
   assert.notEqual(copiedComplexAttr, someComplexAttr, 'clone should be a new instance');
 
-  assert.strictEqual(someComplexAttr.get('id'), copiedComplexAttr.get('id'), 'should copy id');
+  assert.notEqual(someComplexAttr.get('id'), copiedComplexAttr.get('id'), 'should not copy id');
   assert.strictEqual(someComplexAttr.get('foo'), copiedComplexAttr.get('foo'));
   assert.strictEqual(someComplexAttr.get('bar'), copiedComplexAttr.get('bar'));
   assert.equal(someComplexAttr.get('baz'), copiedComplexAttr.get('baz'), 'should not deep copy array');
@@ -76,7 +76,7 @@ test('implements copyable (deep)', function (assert) {
   assert.ok(copiedComplexAttr instanceof SomeComplexAttr, 'clone should be of correct type');
   assert.notEqual(copiedComplexAttr, someComplexAttr, 'clone should be a new instance');
 
-  assert.strictEqual(someComplexAttr.get('id'), copiedComplexAttr.get('id'), 'should copy id');
+  assert.notEqual(someComplexAttr.get('id'), copiedComplexAttr.get('id'), 'should not copy id');
   assert.strictEqual(someComplexAttr.get('foo'), copiedComplexAttr.get('foo'));
   assert.strictEqual(someComplexAttr.get('bar'), copiedComplexAttr.get('bar'));
   assert.notEqual(someComplexAttr.get('baz'), copiedComplexAttr.get('baz'), 'should be a deep copy array');
