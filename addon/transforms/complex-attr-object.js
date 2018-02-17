@@ -11,10 +11,9 @@ export default ComplexAttrTransform.extend({
       return;
     }
 
-    const ComplexAttrFactory = this.factoryForType(type);
     const ComplexAttrRegistration = this.registrationForType(type);
 
-    return ComplexAttrFactory.create(this.deserializeAttributes(ComplexAttrRegistration.attributesMetadata(), serialized));
+    return ComplexAttrRegistration.create(this.deserializeAttributes(ComplexAttrRegistration.attributesMetadata(), serialized));
   },
 
   /**
