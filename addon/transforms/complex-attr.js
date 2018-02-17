@@ -13,24 +13,6 @@ const nullTransform = {
 export default DS.Transform.extend({
 
   /**
-   * @method attributeMetadataForType
-   * @param {String} type ComplexAttr type to fetch metadata for
-   * @returns {{}} The metadata values for the given ComplexAttr type
-   */
-  attributesMetadataForType(type) {
-    const ComplexAttrRegistration = this.registrationForType(type);
-
-    const attributeMetadata = {};
-    ComplexAttrRegistration.eachComputedProperty((name, meta) => {
-      if (meta.isComplexAttribute) {
-        attributeMetadata[name] = meta;
-      }
-    });
-
-    return attributeMetadata;
-  },
-
-  /**
    * @method serializeAttributes
    * @param attributes
    * @param attributesMetadata
