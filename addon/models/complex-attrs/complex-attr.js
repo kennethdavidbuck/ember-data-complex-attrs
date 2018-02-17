@@ -11,4 +11,18 @@ const ComplexAttr = EmberObject.extend(Ember.Copyable, {
   copy() {}
 });
 
+ComplexAttr.reopenClass({
+  attributesMetadata() {
+    const attributeMetadata = {};
+
+    this.eachComputedProperty((name, meta) => {
+      if (meta.isComplexAttribute) {
+        attributeMetadata[name] = meta;
+      }
+    });
+
+    return attributeMetadata;
+  },
+});
+
 export default ComplexAttr;
