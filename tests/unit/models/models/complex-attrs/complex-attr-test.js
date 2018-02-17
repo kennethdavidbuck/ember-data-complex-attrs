@@ -27,7 +27,7 @@ test('it exists', function (assert) {
 });
 
 test('implements copyable (shallow)', function (assert) {
-  assert.expect(7);
+  assert.expect(8);
 
   let nestedComplexAttr = NestableComplexAttr.create({
     foo: 'bar'
@@ -49,7 +49,11 @@ test('implements copyable (shallow)', function (assert) {
   assert.strictEqual(someComplexAttr.get('foo'), copiedComplexAttr.get('foo'));
   assert.strictEqual(someComplexAttr.get('bar'), copiedComplexAttr.get('bar'));
   assert.equal(someComplexAttr.get('baz'), copiedComplexAttr.get('baz'), 'should not deep copy array');
-  assert.equal(someComplexAttr.get('nestedComplexAttr'), copiedComplexAttr.get('nestedComplexAttr'), 'should not copy nested complex attr');
+
+  const copiedNestedComplexAttr = copiedComplexAttr.get('nestedComplexAttr');
+
+  assert.ok(copiedNestedComplexAttr instanceof NestableComplexAttr, 'clone should be of correct type');
+  assert.equal(nestedComplexAttr, copiedNestedComplexAttr, 'should not deep copy nested complex attr');
 });
 
 test('implements copyable (deep)', function (assert) {
@@ -75,7 +79,9 @@ test('implements copyable (deep)', function (assert) {
   assert.strictEqual(someComplexAttr.get('foo'), copiedComplexAttr.get('foo'));
   assert.strictEqual(someComplexAttr.get('bar'), copiedComplexAttr.get('bar'));
   assert.notEqual(someComplexAttr.get('baz'), copiedComplexAttr.get('baz'), 'should be a deep copy array');
-  assert.notEqual(someComplexAttr.get('nestedComplexAttr'), copiedComplexAttr.get('nestedComplexAttr'), 'should be a deep copy nested complex attr');
 
-  assert.strictEqual(someComplexAttr.get('nestedComplexAttr.foo'), copiedComplexAttr.get('nestedComplexAttr.foo'), 'should copy nested properties')
+  const copiedNestedComplexAttr = copiedComplexAttr.get('nestedComplexAttr');
+
+  assert.notEqual(nestedComplexAttr, copiedNestedComplexAttr, 'should be a deep copy nested complex attr');
+  assert.strictEqual(nestedComplexAttr.get('foo'), copiedNestedComplexAttr.get('foo'), 'should copy nested properties')
 });
