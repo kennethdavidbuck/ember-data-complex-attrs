@@ -1,5 +1,4 @@
-import {isBlank} from '@ember/utils';
-import {A} from '@ember/array';
+import {A, isArray} from '@ember/array';
 import ComplexAttrTransform from '@rigo/ember-data-complex-attrs/transforms/complex-attr';
 
 export default ComplexAttrTransform.extend({
@@ -8,7 +7,7 @@ export default ComplexAttrTransform.extend({
    * @override
    */
   deserialize(serialized, {type}) {
-    if (isBlank(serialized)) {
+    if (!isArray(serialized)) {
       return A();
     }
 
@@ -24,7 +23,7 @@ export default ComplexAttrTransform.extend({
    * @override
    */
   serialize(deserialized, {type}) {
-    if (isBlank(deserialized)) {
+    if (!isArray(deserialized)) {
       return [];
     }
 
