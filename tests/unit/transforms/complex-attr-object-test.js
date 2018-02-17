@@ -25,6 +25,12 @@ moduleFor('transform:complex-attr-object', 'Unit | Transform | complex attr obje
   }
 });
 
+test('#deserialize handles blank serialized value', function (assert) {
+  let transform = this.subject();
+
+  assert.equal(transform.deserialize(undefined, {type: 'foo'}), undefined);
+});
+
 test('#deserialize works', function (assert) {
   assert.expect(12);
 

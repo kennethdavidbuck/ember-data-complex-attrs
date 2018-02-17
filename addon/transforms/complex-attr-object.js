@@ -21,7 +21,7 @@ export default ComplexAttrTransform.extend({
    */
   serialize(deserialized, {type}) {
     if (isBlank(deserialized)) {
-      return;
+      return null;
     }
 
     return this.serializeAttributes(this.attributesMetadataForType(type), deserialized);

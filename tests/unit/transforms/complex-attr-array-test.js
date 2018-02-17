@@ -28,7 +28,13 @@ test('it exists', function (assert) {
 test('#deserialize handles blank serialized value', function (assert) {
   let transform = this.subject();
 
-  assert.deepEqual(transform.deserialize(undefined, {type: 'foo'}), []);
+  assert.deepEqual(transform.deserialize([], {type: 'foo'}), []);
+});
+
+test('#deserialize handles undefined/null serialized value', function (assert) {
+  let transform = this.subject();
+
+  assert.equal(transform.deserialize(undefined, {type: 'foo'}), null);
 });
 
 test('#deserialize works', function (assert) {
@@ -96,7 +102,7 @@ test('#serialize handles blank deserialized value', function (assert) {
 
   let transform = this.subject();
 
-  assert.deepEqual(transform.serialize(undefined, {type: 'foo'}), []);
+  assert.deepEqual(transform.serialize(undefined, {type: 'foo'}), null);
 });
 
 test('#serialize works', function (assert) {
