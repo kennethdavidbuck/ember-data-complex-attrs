@@ -22,7 +22,7 @@ export default ComplexAttrTransform.extend({
    */
   serialize(deserialized, {type}) {
     if (isBlank(deserialized)) {
-      return;
+      return null;
     }
     const ComplexAttrRegistration = this.registrationForType(type);
     const attributeMetadata = ComplexAttrRegistration.attributesMetadata();
