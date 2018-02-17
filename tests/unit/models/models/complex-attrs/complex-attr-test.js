@@ -88,7 +88,7 @@ test('implements copyable (deep)', function (assert) {
 });
 
 test('copies in array (shallow)', function (assert) {
-  assert.expect(2);
+  assert.expect(3);
 
   const array = [SomeComplexAttr.create({
     foo: 'abc'
@@ -98,10 +98,11 @@ test('copies in array (shallow)', function (assert) {
 
   assert.notEqual(array, arrayCopy, 'should be new array');
   assert.equal(A(array).get('firstObject'), A(arrayCopy).get('firstObject'), 'should be same instance still');
+  assert.equal(array[0].get('id'), arrayCopy[0].get('id'), 'id should be the same (since this is a shallow array copy');
 });
 
 test('copies in array (deep)', function (assert) {
-  assert.expect(3);
+  assert.expect(4);
 
   const array = [SomeComplexAttr.create({
     foo: 'abc'
@@ -113,4 +114,5 @@ test('copies in array (deep)', function (assert) {
   assert.notEqual(A(array).get('firstObject'), A(arrayCopy).get('firstObject'), 'should be a new instance');
 
   assert.equal(array[0].get('foo'), arrayCopy[0].get('foo'), 'foo property should have been copied');
+  assert.notEqual(array[0].get('id'), arrayCopy[0].get('id'), 'id should not be copied');
 });
