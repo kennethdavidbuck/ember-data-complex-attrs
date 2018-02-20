@@ -4,7 +4,6 @@ import { module, test } from 'qunit';
 
 module('Unit | Mixin | models/complex attrs/identifiable');
 
-// Replace this with your real tests.
 test('it works', function(assert) {
   let ModelsComplexAttrsIdentifiableObject = EmberObject.extend(ModelsComplexAttrsIdentifiableMixin);
   let subject = ModelsComplexAttrsIdentifiableObject.create();
