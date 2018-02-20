@@ -1,13 +1,11 @@
 import {moduleFor, test} from 'ember-qunit';
 import {A} from '@ember/array';
-import {typeOf} from '@ember/utils';
 import {run} from '@ember/runloop';
-import IdentifiableComplexAttrMixin from '@rigo/ember-data-complex-attrs/mixins/models/complex-attrs/identifiable';
 
 import ComplexAttr from '@rigo/ember-data-complex-attrs/models/complex-attrs/complex-attr';
 import attr from '@rigo/ember-data-complex-attrs/attr';
 
-const FooComplexAttr = ComplexAttr.extend(IdentifiableComplexAttrMixin, {
+const FooComplexAttr = ComplexAttr.extend({
   payout: attr('number'),
   rank: attr('number'),
   riderId: attr('string'),
@@ -39,27 +37,24 @@ test('#deserialize handles undefined/null serialized value', function (assert) {
 });
 
 test('#deserialize works', function (assert) {
-  assert.expect(18);
+  assert.expect(15);
 
   let transform = this.subject();
 
   let serialized = [
     {
-      id: 'abc-123',
       rank: null,
       payout: null,
       'rider-display-name': 'Jim Bob',
       'participant-id': 1
     },
     {
-      id: '123-abc',
       rank: '1',
       payout: '5000',
       'rider-display-name': 'Bob Jim',
       'participant-id': 2
     },
     {
-      id: 'foo-bar-baz',
       rank: 1,
       payout: 1000,
       'rider-display-name': 'Bob Hope',
@@ -85,10 +80,6 @@ test('#deserialize works', function (assert) {
   assert.strictEqual(deserialized.objectAt(1).get('participantId'), '2', 'participant id should be deserialized and of correct type');
   assert.strictEqual(deserialized.objectAt(2).get('participantId'), '3', 'participant id should be deserialized and of correct type');
 
-  assert.strictEqual(deserialized.objectAt(0).get('id'), 'abc-123', 'id should be deserialized');
-  assert.strictEqual(deserialized.objectAt(1).get('id'), '123-abc', 'id should be deserialized');
-  assert.strictEqual(deserialized.objectAt(2).get('id'), 'foo-bar-baz', 'id should be deserialized');
-
   assert.strictEqual(deserialized.objectAt(0).get('rank'), null, 'rank should be deserialized and of correct type');
   assert.strictEqual(deserialized.objectAt(1).get('rank'), 1, 'rank should be deserialized and of correct type');
   assert.strictEqual(deserialized.objectAt(2).get('rank'), 1, 'rank should be deserialized and of correct type');
@@ -107,7 +98,7 @@ test('#serialize handles blank deserialized value', function (assert) {
 });
 
 test('#serialize works', function (assert) {
-  assert.expect(15);
+  assert.expect(12);
 
   let transform = this.subject();
 
@@ -145,10 +136,6 @@ test('#serialize works', function (assert) {
   assert.strictEqual(serialized[0]['participant-id'], '1', 'participant id should be serialized');
   assert.strictEqual(serialized[1]['participant-id'], '2', 'participant id should be serialized');
   assert.strictEqual(serialized[2]['participant-id'], '3', 'participant id should be serialized');
-
-  assert.strictEqual(typeOf(serialized[0]['id']), 'string', 'should have an auto-generated id');
-  assert.strictEqual(typeOf(serialized[1]['id']), 'string', 'should have an auto-generated id');
-  assert.strictEqual(typeOf(serialized[2]['id']), 'string', 'should have an auto-generated id');
 
   assert.strictEqual(serialized[0]['rank'], 1, 'rank should be serialized');
   assert.strictEqual(serialized[1]['rank'], 2, 'rank should be serialized');
