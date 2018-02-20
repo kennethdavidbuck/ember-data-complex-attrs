@@ -20,7 +20,7 @@ test('id is not copyable (deep)', function (assert) {
 
   let subject = ModelsComplexAttrsIdentifiableObject.create();
 
-  let copied = subject.copy();
+  let copied = subject.copy(true);
 
   assert.notEqual(subject.get('id'), copied.get('id'), 'should be different ids');
 });
