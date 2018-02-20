@@ -3,8 +3,9 @@ import ComplexAttr from '@rigo/ember-data-complex-attrs/models/complex-attrs/com
 import attr from '@rigo/ember-data-complex-attrs/attr';
 import {typeOf} from '@ember/utils';
 import {run} from '@ember/runloop';
+import IdentifiableComplexAttrMixin from '@rigo/ember-data-complex-attrs/mixins/models/complex-attrs/identifiable';
 
-const FooComplexAttr = ComplexAttr.extend({
+const FooComplexAttr = ComplexAttr.extend(IdentifiableComplexAttrMixin, {
   payout: attr('number'),
   rank: attr('number'),
   riderId: attr('string'),
@@ -13,7 +14,7 @@ const FooComplexAttr = ComplexAttr.extend({
   nestedComplexAttr: attr('complex-attr-object', {type: 'bar'})
 });
 
-const BarComplexAttr = ComplexAttr.extend({
+const BarComplexAttr = ComplexAttr.extend(IdentifiableComplexAttrMixin, {
   someProperty: attr('string'),
   nestedComplexAttr: attr('complex-attr-object', {type: 'bar'})
 });

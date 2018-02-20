@@ -2,11 +2,12 @@ import {moduleFor, test} from 'ember-qunit';
 import {A} from '@ember/array';
 import {typeOf} from '@ember/utils';
 import {run} from '@ember/runloop';
+import IdentifiableComplexAttrMixin from '@rigo/ember-data-complex-attrs/mixins/models/complex-attrs/identifiable';
 
 import ComplexAttr from '@rigo/ember-data-complex-attrs/models/complex-attrs/complex-attr';
 import attr from '@rigo/ember-data-complex-attrs/attr';
 
-const FooComplexAttr = ComplexAttr.extend({
+const FooComplexAttr = ComplexAttr.extend(IdentifiableComplexAttrMixin, {
   payout: attr('number'),
   rank: attr('number'),
   riderId: attr('string'),

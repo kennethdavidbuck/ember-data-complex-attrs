@@ -1,9 +1,8 @@
 import Ember from 'ember';
 import EmberObject from '@ember/object';
-import IdentifiableComplexAttrMixin from '@rigo/ember-data-complex-attrs/mixins/models/complex-attrs/identifiable';
 import {copy} from '@ember/object/internals';
 
-const ComplexAttr = EmberObject.extend(Ember.Copyable, IdentifiableComplexAttrMixin, {
+const ComplexAttr = EmberObject.extend(Ember.Copyable, {
 
   /**
    * @override

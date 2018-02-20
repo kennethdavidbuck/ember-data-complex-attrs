@@ -2,12 +2,13 @@ import {module, test} from 'ember-qunit';
 import ComplexAttr from '@rigo/ember-data-complex-attrs/models/complex-attrs/complex-attr';
 import attr from '@rigo/ember-data-complex-attrs/attr';
 import {A} from '@ember/array'
+import IdentifiableComplexAttrMixin from '@rigo/ember-data-complex-attrs/mixins/models/complex-attrs/identifiable';
 
-let NestableComplexAttr = ComplexAttr.extend({
+let NestableComplexAttr = ComplexAttr.extend(IdentifiableComplexAttrMixin, {
   foo: attr('string')
 });
 
-let SomeComplexAttr = ComplexAttr.extend({
+let SomeComplexAttr = ComplexAttr.extend(IdentifiableComplexAttrMixin, {
   foo: attr('string'),
   bar: attr('number'),
   baz: attr(),
