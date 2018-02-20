@@ -13,7 +13,7 @@ export default ComplexAttrTransform.extend({
 
     const ComplexAttrRegistration = this.registrationForType(type);
 
-    return ComplexAttrRegistration.create(this.deserializeAttributes(ComplexAttrRegistration.attributesMetadata(), serialized));
+    return ComplexAttrRegistration.create(this.deserializeAttributes(ComplexAttrRegistration.complexAttrsMetadata(), serialized));
   },
 
   /**
@@ -24,8 +24,8 @@ export default ComplexAttrTransform.extend({
       return null;
     }
     const ComplexAttrRegistration = this.registrationForType(type);
-    const attributeMetadata = ComplexAttrRegistration.attributesMetadata();
+    const attributesMetadata = ComplexAttrRegistration.complexAttrsMetadata();
 
-    return this.serializeAttributes(attributeMetadata, deserialized);
+    return this.serializeAttributes(attributesMetadata, deserialized);
   }
 });
