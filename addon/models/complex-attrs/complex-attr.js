@@ -1,47 +1,50 @@
 import Ember from 'ember';
 import EmberObject from '@ember/object';
-import {uuid} from 'ember-cli-uuid';
-import attr from '@rigo/ember-data-complex-attrs/attr';
 import {copy} from '@ember/object/internals';
 
-const ComplexAttr = EmberObject.extend(Ember.Copyable);
+const ComplexAttr = EmberObject.extend(Ember.Copyable, {
 
-ComplexAttr.reopenClass({
-  attributesMetadata() {
-    // TODO: Should we cache this value?
-    const attributeMetadata = {};
+  /**
+   * @override
+   */
+  copy(deep) {
+    const klass = this.constructor;
+    const properties = {};
 
-    this.eachComputedProperty((name, meta) => {
-      if (meta.isComplexAttribute) {
-        attributeMetadata[name] = meta;
+    klass.eachComplexAttr((name, meta) => {
+      if (meta.options.copyable) {
+        properties[name] = deep ? copy(this.get(name), deep) : this.get(name);
       }
     });
 
-    return attributeMetadata;
+    return klass.create(properties);
   }
 });
 
-ComplexAttr.reopen({
-  id: attr('string', {
-    defaultValue: () => uuid()
-  }),
+ComplexAttr.reopenClass({
 
-  copy(deep) {
-    const klass = this.constructor;
-    const attributesMetadata = klass.attributesMetadata();
+  /**
+   * @method complexAttrsMetadata
+   */
+  complexAttrsMetadata() {
+    const attributeMetadata = {};
 
-    const properties = Object.keys(attributesMetadata).reduce((result, attributeName) => {
-      // do not copy id!
-      if(attributeName === 'id') {
-        return result;
+    this.eachComplexAttr((name, meta) => {
+      attributeMetadata[name] = meta;
+    });
+
+    return attributeMetadata;
+  },
+
+  /**
+   * @method eachComplexAttr
+   */
+  eachComplexAttr(fn) {
+    this.eachComputedProperty((name, meta) => {
+      if (meta.isComplexAttr) {
+        fn.call(this, name, meta);
       }
-
-      result[attributeName] = deep ? copy(this.get(attributeName), deep) : this.get(attributeName);
-
-      return result;
-    }, {});
-
-    return klass.create(properties);
+    });
   }
 });
 
