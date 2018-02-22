@@ -1,5 +1,8 @@
 # Ember Data Complex Attrs Changelog
 
+# v0.4.0
+- [#5](https://github.com/rigosolutions/ember-data-complex-attrs/pull/5) Make complex attr ids opt in via mixin
+
 # v0.3.0
 - [#3](https://github.com/rigosolutions/ember-data-complex-attrs/pull/3) Remove factoryFor complex-attr creation
 

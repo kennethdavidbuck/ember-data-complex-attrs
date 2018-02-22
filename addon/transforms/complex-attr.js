@@ -54,7 +54,7 @@ export default DS.Transform.extend({
   /**
    * @method transformForType
    * @param {String} type The type of transform to be resolved
-   * @returns {DS.Transform} The transformer for the given type
+   * @returns {DS.Transform|Object} The transformer for the given type
    */
   transformForType(type) {
     return isPresent(type) ? getOwner(this).lookup(`transform:${type}`) : nullTransform;
