@@ -23,6 +23,7 @@ export default ComplexAttrTransform.extend({
     if (isBlank(deserialized)) {
       return null;
     }
+
     const ComplexAttrRegistration = this.registrationForType(type);
     const attributesMetadata = ComplexAttrRegistration.complexAttrsMetadata();
 
